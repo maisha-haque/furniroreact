@@ -1,48 +1,53 @@
 import React from 'react'
-import Image from '../common/Image'
 import Container from '../common/Container'
-import Flex from '../common/Flex'
+import { Link } from 'react-router-dom'
 import dinning from '/src/assets/dinning.png'
 import living from '/src/assets/living.png'
 import bedroom from '/src/assets/bedroom.png'
 
 const Range = () => {
+  const categories = [
+    { title: 'Dining', image: dinning, path: '/shop' },
+    { title: 'Living', image: living, path: '/shop' },
+    { title: 'Bedroom', image: bedroom, path: '/shop' },
+  ]
+
   return (
-    <>
-    <div className="mt-6">
-      <h3 className={"font-bold font-serif text-[25px] text-center"}>Browse The Range</h3>
-      <h4 className={"text-gray-600 font-serif text-center text-xl"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
-    </div>
-
-    <div className="mt-10">
-     <Container>
-      <Flex className={"items-center gap-15"}>
-
-        <div className="ml-10">
-          <Image imgSrc={dinning} className={""}/>
-          <h3 className={"text-center font-medium text-[16px] mt-4"}>Dinning</h3>
-
+    <section className="py-12 sm:py-16">
+      <Container>
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#333333] mb-2">
+            Browse The Range
+          </h2>
+          <p className="text-[#666666] text-sm sm:text-base">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
         </div>
 
-        <div className="">
-        <Image imgSrc={living} className={""}/>
-        <h3 className={"text-center font-medium text-[16px] mt-4"}>Living</h3>
-
-
+        {/* 3 Categories Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+          {categories.map((cat) => (
+            <Link
+              key={cat.title}
+              to={cat.path}
+              className="group flex flex-col items-center cursor-pointer"
+            >
+              <div className="w-full overflow-hidden rounded-[10px] bg-[#F4F5F7] aspect-[4/5]">
+                <img
+                  src={cat.image}
+                  alt={cat.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              </div>
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#333333] mt-5 group-hover:text-[#B88E2F] transition-colors">
+                {cat.title}
+              </h3>
+            </Link>
+          ))}
         </div>
-        
-        <div className="">
-        <Image imgSrc={bedroom} className={""}/>
-        <h3 className={"text-center font-medium text-[16px] mt-4"}>Bedroom</h3>
-
-
-        </div>
-        
-
-      </Flex>
       </Container>
-    </div>
-    </>
+    </section>
   )
 }
 
